@@ -1,0 +1,43 @@
+# --------------------
+# Entorno virtual
+# --------------------
+venv/
+.env/
+__pycache__/
+*.pyc
+
+# --------------------
+# Reportes generados
+# --------------------
+reports/
+allure-html/
+output/
+
+# --------------------
+# Logs y temporales
+# --------------------
+*.log
+*.tmp
+*.bak
+
+# --------------------
+# Archivos de sistema
+# --------------------
+.DS_Store
+Thumbs.db
+
+# --------------------
+# IDEs y editores
+# --------------------
+.vscode/
+.idea/
+*.iml
+*.sublime-project
+*.sublime-workspace
+
+# --------------------
+# Python cache
+# --------------------
+*.pytest_cache/
+.cache/
+.pytest_cache/
