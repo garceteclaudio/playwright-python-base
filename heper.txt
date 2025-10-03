@@ -15,3 +15,10 @@ allure open allure-report
 
 behave -f allure_behave.formatter:AllureFormatter -o reports/ features
 allure generate reports/ -o allure-html --clean --single-file
+
+
+pip install behavex
+behavex
+behavex --parallel-processes=2 --parallel-scheme scenario
+behavex -f html -o reports/report.html --parallel-processes=2 features/
+allure generate reports/ -o allure-html --clean --single-file
