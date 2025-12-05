@@ -16,7 +16,7 @@ for folder in folders_to_remove:
 # ===============================
 # Configuración de tags
 # ===============================
-tags_value = "@login"  # Cambiar según necesidad
+tags_value = "@test12345"  # Cambiar según necesidad
 behave_command = f"--tags={tags_value} -f allure_behave.formatter:AllureFormatter -o reports/ features"
 
 # ===============================

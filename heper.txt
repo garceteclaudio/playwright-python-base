@@ -1,9 +1,9 @@
-python -m venv venv
-venv\Scripts\activate
+python -m venv .venv
+.venv\Scripts\activate
 pip list
 pip install --upgrade pip
 pip install -r requirements.txt
-
+playwright install
 
 behave -f allure_behave.formatter:AllureFormatter -o allure-results
 ## aca 1
