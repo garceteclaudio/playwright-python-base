@@ -6,11 +6,51 @@ pip install -r requirements.txt
 playwright install
 
 behave -f allure_behave.formatter:AllureFormatter -o allure-results
+
+Reporte allure
+1- Instalar scoop en windows
+iwr -useb get.scoop.sh | iex
+2- scoop --version
+3- Instalar allure con scoop
+scoop install allure
+4- allure --version
+
 ## aca 1
-allure generate allure-results -o allure-report --clean
+allure generate reports/login -o allure-report --clean
 ## aca 2
 allure generate allure-results -o allure-report --clean
-allure open allure-report
+allure serve allure-results
+
+
+
+behave -f allure_behave.formatter:AllureFormatter -o allure-results
+
+
+allure serve allure-results
+allure generate allure-results -o allure-report --clean
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 behave -f allure_behave.formatter:AllureFormatter -o reports/ features

@@ -16,7 +16,7 @@ def clean_filename(name: str) -> str:
 
 def before_all(context):
     context.playwright = sync_playwright().start()
-    context.browser = context.playwright.chromium.launch(headless=False)
+    context.browser = context.playwright.chromium.launch(headless=True)
 
 def before_scenario(context, scenario):
     context.page = context.browser.new_page()
