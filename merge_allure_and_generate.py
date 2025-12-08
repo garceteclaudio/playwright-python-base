@@ -13,46 +13,47 @@ OUTPUT_DIR = Path("allure-report")
 # =====================================
 def find_allure_command():
     system = platform.system()
+    home = Path.home()
 
-    possible_paths = ["allure"]  # siempre intentar primero el PATH global
+    possible_paths = ["allure"]  # intentar primero en PATH
 
     if system == "Windows":
         possible_paths += [
             "allure.bat",
             r"C:\Program Files\Allure\bin\allure.bat",
-            rf"C:\Users\{os.getlogin()}\scoop\apps\allure\current\bin\allure.bat",
+            home / "scoop" / "apps" / "allure" / "current" / "bin" / "allure.bat",
         ]
 
-    if system == "Linux" or system == "Darwin":  # Darwin = macOS
+    if system in ("Linux", "Darwin"):  # Darwin = macOS
         possible_paths += [
             "/usr/local/bin/allure",
-            "/opt/homebrew/bin/allure",       # macOS M1/M2/M3
+            "/opt/homebrew/bin/allure",   # macOS M1/M2/M3
             "/usr/bin/allure",
         ]
 
-    # Intentar ejecutar allure hasta encontrar uno válido
     for cmd in possible_paths:
         try:
             subprocess.run(
-                [cmd, "--version"], 
-                stdout=subprocess.PIPE, 
+                [str(cmd), "--version"],
+                stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE
             )
             print(f"✔ Allure encontrado: {cmd}")
-            return cmd
+            return str(cmd)
         except Exception:
             pass
 
     raise FileNotFoundError(
-        "❌ No se encontró Allure en el sistema. Agregá Allure al PATH o instalalo.\n"
-        "Windows -> scoop install allure\n"
-        "Linux/macOS -> brew install allure"
+        "❌ No se encontró Allure.\n"
+        "Instalar:\n"
+        "Windows → scoop install allure\n"
+        "macOS → brew install allure\n"
+        "Linux → instalar manualmente desde GitHub"
     )
 
 # =====================================
-# Funciones auxiliares
+# Manejo de carpetas
 # =====================================
-
 def clean_and_create_dir(directory: Path):
     if directory.exists():
         shutil.rmtree(directory)
@@ -73,24 +74,33 @@ def merge_allure_results():
 
     print("✅ Merge completado.")
 
+# =====================================
+# Generar reporte final
+# =====================================
 def generate_allure_report():
     allure_cmd = find_allure_command()
 
     print("⚙️ Generando reporte Allure...")
 
-    command = [
+    base_cmd = [
         allure_cmd,
         "generate",
         str(MERGED_DIR),
         "-o",
         str(OUTPUT_DIR),
-        "--clean",
-        "--single-file"
+        "--clean"
     ]
 
-    subprocess.run(command, check=True)
+    # intentar single-file
+    try:
+        subprocess.run(base_cmd + ["--single-file"], check=True)
+    except subprocess.CalledProcessError:
+        print("⚠️ --single-file no soportado. Generando reporte normal...")
+        subprocess.run(base_cmd, check=True)
+
     print(f"🎉 Reporte generado en: {OUTPUT_DIR}/index.html")
 
+# =====================================
 def main():
     merge_allure_results()
     generate_allure_report()
