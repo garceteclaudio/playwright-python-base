@@ -60,12 +60,17 @@ jobs:
         python3.12 runner.py
 
     # -------------------------------
-    #       INSTALAR ALLURE CLI
+    #       INSTALAR ALLURE CLI: sudo apt install -y allure
+    # En Ubuntu 24.04 (ubuntu-latest), que hoy usa GitHub Actions, Allure YA NO está disponible en el repositorio APT.
     # -------------------------------
-    - name: 📦 Instalar Allure
+    - name: 📦 Instalar Allure CLI Manualmente
       run: |
         sudo apt update
-        sudo apt install -y allure
+        sudo apt install -y openjdk-11-jre wget unzip
+        wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.zip
+        unzip allure-2.29.0.zip
+        sudo mv allure-2.29.0 /opt/allure
+        sudo ln -s /opt/allure/bin/allure /usr/local/bin/allure
 
     - name: 🧪 Verificar instalación de Allure
       run: |
