@@ -62,14 +62,10 @@ jobs:
     # -------------------------------
     #       INSTALAR ALLURE CLI
     # -------------------------------
-    - name: 📦 Instalar Allure 2.29.0
+    - name: 📦 Instalar Allure
       run: |
         sudo apt update
-        sudo apt install -y openjdk-11-jre wget unzip
-        wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-commandline-2.29.0.zip
-        unzip allure-commandline-2.29.0.zip
-        sudo mv allure-2.29.0 /opt/allure
-        sudo ln -s /opt/allure/bin/allure /usr/bin/allure
+        sudo apt install -y allure
 
     - name: 🧪 Verificar instalación de Allure
       run: |
