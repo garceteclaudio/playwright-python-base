@@ -2,3 +2,4 @@ behave==1.2.6
 playwright==1.48.0
 pytest==8.4.2
 allure-behave==2.13.5
+behavex==4.6.0

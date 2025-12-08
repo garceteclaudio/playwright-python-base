@@ -15,34 +15,27 @@ iwr -useb get.scoop.sh | iex
 scoop install allure
 4- allure --version
 
+
+//// Para una ejecucion
+behave -f allure_behave.formatter:AllureFormatter -o allure-results
+allure generate allure-results -o allure-report --clean --single-file
+allure serve allure-results
+
+--------------------------------
+
+
+
+//// Para una ejecucion con runner.py
+behave -f allure_behave.formatter:AllureFormatter -o allure-results
+allure generate reports/login -o allure-report --clean --single-file
+allure serve allure-results
+
+
 ## aca 1
 allure generate reports/login -o allure-report --clean
 ## aca 2
 allure generate allure-results -o allure-report --clean
 allure serve allure-results
-
-
-
-behave -f allure_behave.formatter:AllureFormatter -o allure-results
-
-
-allure serve allure-results
-allure generate allure-results -o allure-report --clean
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -57,8 +50,3 @@ behave -f allure_behave.formatter:AllureFormatter -o reports/ features
 allure generate reports/ -o allure-html --clean --single-file
 
 
-pip install behavex
-behavex
-behavex --parallel-processes=2 --parallel-scheme scenario
-behavex -f html -o reports/report.html --parallel-processes=2 features/
-allure generate reports/ -o allure-html --clean --single-file

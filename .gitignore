@@ -6,7 +6,9 @@ venv/
 __pycache__/
 *.pyc
 .venv/
-
+allure-report/
+allure-results/
+merged-results/
 # --------------------
 # Reportes generados
 # --------------------

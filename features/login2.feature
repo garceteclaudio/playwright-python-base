@@ -1,4 +1,4 @@
-Feature: Login en SauceDemo
+Feature: Login 2
   Como usuario de la app
   Quiero poder iniciar sesión
   Para acceder al inventario

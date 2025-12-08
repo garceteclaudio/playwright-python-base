@@ -2,26 +2,32 @@ import re
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 import allure
+import os
 
 # ============================
 # Función para limpiar nombres
 # ============================
 def clean_filename(name: str) -> str:
-    # Reemplaza cualquier carácter que no sea alfanumérico, guion o guion bajo
-    return re.sub(r'[<>:"/\\|?*]', '_', name)
+    return re.sub(r'[<>:"/\\|?* ]+', '_', name)
 
 # ============================
-# Hooks de Behave
+# Hooks de Behave / BehaveX
 # ============================
 
 def before_all(context):
     context.playwright = sync_playwright().start()
-    context.browser = context.playwright.chromium.launch(headless=True)
 
 def before_scenario(context, scenario):
+    # Lanzar el browser por proceso → más estable con BehaveX
+    context.browser = context.playwright.chromium.launch(headless=False)
     context.page = context.browser.new_page()
-    context.screenshot_dir = Path(f"reports/screenshots/{clean_filename(scenario.name)}")
+
+    # Carpeta de screenshots por escenario
+    pid = os.getpid()
+    folder_name = f"{clean_filename(scenario.name)}_{pid}"
+    context.screenshot_dir = Path(f"reports/screenshots/{folder_name}")
     context.screenshot_dir.mkdir(parents=True, exist_ok=True)
+
     context.step_counter = 1
 
 def after_step(context, step):
@@ -29,15 +35,17 @@ def after_step(context, step):
     screenshot_path = context.screenshot_dir / filename
     context.page.screenshot(path=str(screenshot_path))
 
-    # Adjuntar a Allure
-    with open(screenshot_path, "rb") as image_file:
-        allure.attach(image_file.read(), name=step.name, attachment_type=allure.attachment_type.PNG)
-
+    # Adjuntar a ALLURE (forma compatible)
+    allure.attach(
+        body=open(screenshot_path, "rb").read(),
+        name=f"Step {context.step_counter}: {step.name}",
+        attachment_type=allure.attachment_type.PNG
+    )
     context.step_counter += 1
 
 def after_scenario(context, scenario):
     context.page.close()
+    context.browser.close()
 
 def after_all(context):
-    context.browser.close()
     context.playwright.stop()

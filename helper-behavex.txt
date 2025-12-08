@@ -1,0 +1,6 @@
+pip install behavex
+behavex
+
+
+Reporte en: playwright-python-base/output/report.html
+behavex --parallel-processes=4 --parallel-scheme scenario
