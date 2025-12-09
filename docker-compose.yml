@@ -4,6 +4,8 @@ services:
   tests:
     build: .
     container_name: python_playwright_allure
+    volumes:
+      - ./allure-report:/app/allure-report    
     environment:
       PLAYWRIGHT_HEADLESS: "1"
       USERNAME: "testing"

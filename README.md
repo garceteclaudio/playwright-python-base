@@ -1,65 +1,107 @@
-
+# Playwright Python Base
 
 ## 📌 Project Details
 
-**Technologies**: Python, behave and playwright
+**Technologies:** Python, Behave, Playwright
 
 ## 🚀 Quick Start
 
-## Prerequisites
+### Prerequisites
 
-- Python 3.8+
-- Behave
+-   Python 3.12+
+-   Playwright
+-   Behave
+-   Docker (optional)
+-   Docker Compose (optional)
 
-## Installation
+------------------------------------------------------------------------
 
-1. Clone the repository
-2. Set up virtual environment:
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # Linux/Mac
-   .venv\Scripts\activate    # Windows
-   ```
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+## 🔧 Installation (Local)
 
-## Estructura del proyecto
+### 1. Clone the repository
 
-```text
-PLAYWRIGHT-PYTHON-BASE/
-├── config/
-│   ├── device-config.json
-├── features/
-│   ├── steps/
-│   ├── environment.py
-├── pages/
-├── behave.ini
-└── README.md
-└── requirements.txt
-└── runner-1hilo.py
-└── runner.py
-```
+    git clone https://github.com/tu-repo/playwright-python-base.git
+    cd playwright-python-base
 
-## ⚙ Configuration
+### 2. Create virtual environment
 
-##### Report settings:
+#### Linux/Mac:
 
-- See behave.ini
+    python3 -m venv .venv
+    source .venv/bin/activate
 
-## 🏃 Running Tests
+#### Windows:
 
-Run runner.py and use tags to execute specific scenarios.
+    python -m venv .venv
+    .venv\Scripts\activate
 
-## 📊 Generating Reports
+### 3. Install dependencies
 
-### Gerate Allure HTML report
+    pip install -r requirements.txt
+    playwright install
 
-    allure generate --single-file reports -o allure_report_output --report-name "Mi Reporte de Pruebas" --lang es --clean
+------------------------------------------------------------------------
+
+## 📁 Project Structure
+
+    PLAYWRIGHT-PYTHON-BASE/
+    ├── features/
+    │   ├── steps/
+    │   │   ├── test_login_steps.py
+    │   ├── login.feature
+    │   ├── login2.feature
+    │   ├── login3.feature
+    │   ├── environment.py
+    ├── tests/
+    ├── Dockerfile
+    ├── docker-compose.yml
+    ├── requirements.txt
+    ├── runner.py
+    ├── runner-1hilo.py
+    ├── merge_allure_and_generate.py
+    └── README.md
+
+------------------------------------------------------------------------
+
+## 🐳 Running with Docker Compose
+
+### Run with build (first time or when the Dockerfile changes)
+
+    docker-compose up --build
+
+This will: - Build the container\
+- Run Playwright + Behave\
+- Generate Allure results automatically
+
+### Run without build (faster)
+docker-compose up
+
+------------------------------------------------------------------------
+
+## 🏃 Running Tests (Local)
+
+### Run all tests:
+
+    python runner.py
+
+### Run with tags:
+
+    behave -t @login
+
+------------------------------------------------------------------------
+
+## 📊 Allure Report
+
+### Generate report:
+
+    allure generate --single-file reports -o allure_report_output --report-name "Reporte de Pruebas" --lang es --clean
+
+### Open report:
+
+    allure open allure_report_output
+
+------------------------------------------------------------------------
 
 ## 📧 Contact
 
-#### For questions or issues, please contact:
-
-https://www.linkedin.com/in/cgarcete/
+LinkedIn: https://www.linkedin.com/in/cgarcete/
