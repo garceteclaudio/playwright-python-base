@@ -21,7 +21,7 @@ os.makedirs("Reportes/reportXML", exist_ok=True)
 # ===============================
 # Configuración de tags
 # ===============================
-TAGS = "@login"  # Cambiar según necesidad
+TAGS = "@login"
 FEATURES_DIR = "features"
 
 # ===============================

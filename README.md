@@ -16,32 +16,6 @@
 
 ------------------------------------------------------------------------
 
-## 🔧 Installation (Local)
-
-### 1. Clone the repository
-
-    git clone https://github.com/tu-repo/playwright-python-base.git
-    cd playwright-python-base
-
-### 2. Create virtual environment
-
-#### Linux/Mac:
-
-    python3 -m venv .venv
-    source .venv/bin/activate
-
-#### Windows:
-
-    python -m venv .venv
-    .venv\Scripts\activate
-
-### 3. Install dependencies
-
-    pip install -r requirements.txt
-    playwright install
-
-------------------------------------------------------------------------
-
 ## 📁 Project Structure
 
     PLAYWRIGHT-PYTHON-BASE/
@@ -63,6 +37,76 @@
 
 ------------------------------------------------------------------------
 
+## 🔧 Installation (Local)
+
+### 1. Clone the repository
+```bash
+    git clone https://github.com/tu-repo/playwright-python-base.git
+    cd playwright-python-base
+```
+### 2. Create virtual environment
+
+#### Linux/Mac:
+```bash
+    python3 -m venv .venv
+    source .venv/bin/activate
+```
+#### Windows:
+```bash
+    python -m venv .venv
+    .venv\Scripts\activate
+```
+### 3. Install dependencies
+```bash
+    pip install -r requirements.txt
+    playwright install
+```
+------------------------------------------------------------------------
+
+## 🏃 Run Tests (Local)
+
+### Run all tests with python:
+```bash
+  python runner.py
+```
+
+### Run test using Behave:
+#### With a specific tag
+```bash
+  behave --tags=@test12345 -f allure_behave.formatter:AllureFormatter -o allure-results
+
+```
+
+#### Run all tests
+```bash
+  behave -f allure_behave.formatter:AllureFormatter -o allure-results
+```
+     
+
+------------------------------------------------------------------------
+
+## 📊 Allure Report (Local)
+
+### Generate the report (only when using runner.py)
+```bash
+    python merge_allure_and_generate.py
+```
+Check the allure-report/ folder and open the generated report.
+
+### Generate a single-file report with Allure
+```bash
+    allure generate allure-results -o allure-report --clean --single-file
+```
+Check the allure-report/index.html file and open the generated report.
+
+### Generate and view the report using the Allure server
+```bash
+    allure serve allure-results
+```    
+
+------------------------------------------------------------------------
+
+
 ## 🐳 Running with Docker Compose
 
 ### Run with build (first time or when the Dockerfile changes)
@@ -77,31 +121,12 @@ This will: - Build the container\
 
     docker-compose up
 
-------------------------------------------------------------------------
-
-## 🏃 Running Tests (Local)
-
-### Run all tests:
-
-    python runner.py
-
-### Run with tags:
-
-    behave -t @login
-
-------------------------------------------------------------------------
-
-## 📊 Allure Report
-
-### Generate report:
-
-    allure generate --single-file reports -o allure_report_output --report-name "Reporte de Pruebas" --lang es --clean
-
 ### Open report:
 
-    allure open allure_report_output
+    allure-results/
 
 ------------------------------------------------------------------------
+
 
 ## 📧 Contact
 
