@@ -74,7 +74,8 @@ This will: - Build the container\
 - Generate Allure results automatically
 
 ### Run without build (faster)
-docker-compose up
+
+    docker-compose up
 
 ------------------------------------------------------------------------
 
