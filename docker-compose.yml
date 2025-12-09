@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  tests:
+    build: .
+    container_name: python_playwright_allure
+    environment:
+      PLAYWRIGHT_HEADLESS: "1"
+      USERNAME: "testing"
+      PASSWORD: "testing"
+    command: >
+      bash -c "
+        python3 runner.py &&
+        python3 merge_allure_and_generate.py &&
+        echo 'Reporte Allure generado en /app/allure-report'
+      "

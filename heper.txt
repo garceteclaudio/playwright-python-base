@@ -50,3 +50,59 @@ behave -f allure_behave.formatter:AllureFormatter -o reports/ features
 allure generate reports/ -o allure-html --clean --single-file
 
 
+
+
+
+---------
+Construye la imagen definida en tu Dockerfile.
+docker-compose build
+Pero usando la configuración de docker-compose.yml.
+
+🔍 ¿Cuándo se usa?
+
+Cuando modificás el Dockerfile.
+
+Cuando agregás dependencias nuevas.
+
+Cuando querés regenerar la imagen desde cero.
+
+🧠 Importante
+
+docker-compose build solo construye.
+No ejecuta el contenedor.
+
+
+
+🚀 ¿Qué hace docker-compose up --build?
+👉 Hace dos cosas juntas:
+Construye la imagen (si cambió o si ponés --build obligás a reconstruirla).
+Levanta y ejecuta el contenedor.
+Es decir, reemplaza a:
+
+docker-compose up --build
+
+
+
+Limpiar todas las capas corruptas
+docker system prune -af
+docker builder prune -af
+
+Reset completo de Docker
+docker system prune -a --volumes
+
+Esto elimina:
+caché roto
+capas incompletas
+builds fallidos
+
+---------------------------
+eliminar todo los datos
+docker system prune -af
+docker builder prune -af
+
+
+
+docker-compose up --build
+obtener Reporte
+
+docker cp python_playwright_allure:/app/allure-report C:\Users\PC\Desktop\testin
