@@ -19,7 +19,7 @@ def before_all(context):
 
 def before_scenario(context, scenario):
     # Lanzar el browser por proceso → más estable con BehaveX
-    context.browser = context.playwright.chromium.launch(headless=True)
+    context.browser = context.playwright.chromium.launch(headless=False)
     context.page = context.browser.new_page()
 
     # Carpeta de screenshots por escenario

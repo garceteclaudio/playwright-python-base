@@ -3,7 +3,7 @@ Feature: Login 3
   Quiero poder iniciar sesión
   Para acceder al inventario
 
-  @login
+  @login @test12345
   Scenario: Login3
     Given el usuario abre la página de login
     When ingresa el usuario "standard_user" y contraseña "secret_sauce"
