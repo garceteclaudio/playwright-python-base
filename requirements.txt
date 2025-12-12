@@ -3,4 +3,5 @@ playwright==1.48.0
 pytest==8.4.2
 allure-behave==2.13.5
 behavex==4.6.0
-behave-html-formatter
+rich==13.7.1
+behave-html-formatter==0.9.10
