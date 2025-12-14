@@ -17,7 +17,7 @@ MAX_PROCESSES = 3
 # 1) LIMPIAR CARPETAS (solo proceso principal)
 # ============================================
 def clean_folders():
-    folders_to_remove = ["reports", "allure-html", "output", "Reportes"]
+    folders_to_remove = ["allure-report","reports", "allure-html", "output", "Reportes", "allure-generated-merged-results"]
     for folder in folders_to_remove:
         if os.path.exists(folder):
             shutil.rmtree(folder, ignore_errors=True)
@@ -25,7 +25,6 @@ def clean_folders():
 
     os.makedirs("reports", exist_ok=True)
     os.makedirs("output", exist_ok=True)
-    os.makedirs("Reportes/reportXML", exist_ok=True)
 
 
 # ============================================
@@ -67,8 +66,6 @@ def run_feature(feature_file, tags):
         "--verbose",
         "--format", "pretty",
         "--outfile", output_file,
-        "--junit",
-        "--junit-directory", "Reportes/reportXML",
         "-f", "allure_behave.formatter:AllureFormatter",
         "-o", report_folder
     ]

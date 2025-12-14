@@ -9,6 +9,7 @@ __pycache__/
 allure-report/
 allure-results/
 merged-results/
+allure-generated-merged-results/
 # --------------------
 # Reportes generados
 # --------------------

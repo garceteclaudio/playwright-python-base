@@ -5,7 +5,7 @@ from pathlib import Path
 import platform
 
 ROOT_DIR = Path("reports")
-MERGED_DIR = Path("merged-results")
+MERGED_DIR = Path("allure-generated-merged-results")
 OUTPUT_DIR = Path("allure-report")
 
 # =====================================
