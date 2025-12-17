@@ -1,0 +1,34 @@
+docker-compose down -v
+
+docker rmi playwright-python-base-tests:latest
+
+rm -rf reports output allure-report merged-results
+
+
+docker-compose up --build
+
+
+docker start python_playwright_allure
+
+docker exec -it python_playwright_allure bash
+
+ls -la
+ls -la output
+ls -la reports
+ls -la allure-report
+
+
+docker compose run --name test_run -it tests bash -c "python3 runner.py && python3 merge_allure_and_generate.py; sleep infinity"
+
+docker exec -it test_run bash
+#para salir
+exit
+
+
+ls -la
+ls -la /app/reports
+ls -la /app/output
+ls -la /app/allure-report
+
+docker stop test_run
+docker rm test_run
